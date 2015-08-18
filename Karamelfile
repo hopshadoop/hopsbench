@@ -4,9 +4,11 @@ dependencies:
     local:
       - hopsbench::install
     global:
+      - hops::dn
   - recipe: hopsbench::slave
     local:
       - hopsbench::install
     global:
+      - hops::dn
 
 
