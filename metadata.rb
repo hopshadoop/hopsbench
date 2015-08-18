@@ -6,6 +6,8 @@ description      'Installs/Configures/Runs hopsbench'
 version          "0.1"
 
 recipe            "hopsbench::install", "Experiment setup for hopsbench"
+recipe            "hopsbench::master",  "configFile=; Experiment name: master"
+recipe            "hopsbench::slave",  "configFile=; Experiment name: slave"
 
 
 depends "kagent"

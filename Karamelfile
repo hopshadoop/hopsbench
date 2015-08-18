@@ -1,4 +1,12 @@
 dependencies:
   - recipe: hopsbench::install
+  - recipe: hopsbench::master
+    local:
+      - hopsbench::install
+    global:
+  - recipe: hopsbench::slave
+    local:
+      - hopsbench::install
+    global:
 
 
