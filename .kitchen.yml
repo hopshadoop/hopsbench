@@ -2,32 +2,82 @@
 driver:
   name: vagrant
   customize:
-    memory: 3000
+    memory: 2048
+    cpuexecutioncap: 90
+    cpus: 6
     natdnshostresolver1: "on"
     natdnsproxy1: "on"
+    nictype1: "virtio"
 
 provisioner:
   name: chef_solo
 
 platforms:
-  - name: centos-6.5
+#  - name: centos-6.5
   - name: ubuntu-14.04
 
 suites: 
   - name: default
     run_list:
       - recipe[kagent::install]
+      - recipe[hops::install]
       - recipe[hopsbench::install]
-      - recipe[hopsbench::experiment]
-
+      - recipe[hops::client]
+      - recipe[hopsbench::master]
+      - recipe[hopsbench::slave]
     attributes:
          hopsbench:
-            experiment:
+            master:
+                private_ips: ["10.0.2.15"]
+                public_ips: ["10.0.2.15"]
+            slave:
                 private_ips: ["10.0.2.15"]
                 public_ips: ["10.0.2.15"]
             private_ips: ["10.0.2.15"]
             public_ips: ["10.0.2.15"]
          kagent:
+            private_ips: ["10.0.2.15"]
+            public_ips: ["10.0.2.15"]
+         ndb:
+            mgmd:
+               private_ips: ["10.0.2.15"]
+            ndbd:
+               private_ips: ["10.0.2.15"]
+            mysqld:
+               private_ips: ["10.0.2.15"]
+            memcached:
+               private_ips: ["10.0.2.15"]
+            private_ips: ["10.0.2.15"]
+            public_ips: ["10.0.2.15"]
+            enabled: "true"
+         hops:
+            nn:
+               private_ips: ["10.0.2.15"]
+            dn:
+               private_ips: ["10.0.2.15"]
+            rm:
+               private_ips: ["10.0.2.15"]
+            nm:
+               private_ips: ["10.0.2.15"]
+            jhs:
+               private_ips: ["10.0.2.15"]
+            use_hopsworks: "true"
+         hadoop:
+            nn:
+               private_ips: ["10.0.2.15"]
+            dn:
+               private_ips: ["10.0.2.15"]
+            rm:
+               private_ips: ["10.0.2.15"]
+            nm:
+               private_ips: ["10.0.2.15"]
+            jhs:
+               private_ips: ["10.0.2.15"]
+            private_ips: ["10.0.2.15"]
+            public_ips: ["10.0.2.15"]
+         hopsworks:
+            default:
+               private_ips: ["10.0.2.15"]
             private_ips: ["10.0.2.15"]
             public_ips: ["10.0.2.15"]
          private_ips: ["10.0.2.15"]
