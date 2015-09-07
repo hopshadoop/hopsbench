@@ -11,6 +11,6 @@ dependencies:
     local:
       - hopsbench::install
     global:
-      - hops::client
+      - hopsbench::master
 
 
