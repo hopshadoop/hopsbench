@@ -13,6 +13,7 @@ action :return_publickey do
     source "ssh_config.erb"
     owner node[:hopsbench][:user]
     group node[:hopsbench][:group]
+    cookbook "ndb"
     mode 0664
   end
  
