@@ -14,7 +14,7 @@ action :return_publickey do
     owner node[:hopsbench][:user]
     group node[:hopsbench][:group]
     cookbook "ndb"
-    mode 0664
+    mode 0600
   end
  
  kagent_param "/tmp" do
