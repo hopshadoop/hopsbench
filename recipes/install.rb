@@ -24,3 +24,7 @@ ark "hopsbench" do
   owner node[:hopsbench][:user]
 end
 
+
+package "pssh" do
+  action :install
+end

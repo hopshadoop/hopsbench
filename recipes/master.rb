@@ -1,3 +1,23 @@
+file "#{node[:hopsbench][:conf_dir]}/namenodes" do
+   owner node[:hopsbench][:user]
+   action :delete
+end
+
+namenodes = node[:hops][:nn][:private_ips].join("\n")
+namenodes += "\n"
+
+Chef::Log.info "The contents of the namenodes file: #{namenodes}"
+
+file "#{node[:hopsbench][:conf_dir]}/namenodes" do
+  owner node[:hopsbench][:user]
+  group node[:hopsbench][:group]
+  mode '644'
+  content namenodes.to_s
+  action :create
+end
+
+
+
 
 file "#{node[:hopsbench][:conf_dir]}/slaves" do
    owner node[:hopsbench][:user]
