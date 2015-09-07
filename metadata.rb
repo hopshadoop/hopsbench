@@ -32,7 +32,6 @@ attribute "hopsbench/url",
 
 attribute "hopsbench/user",
 :description => "Run hopsbench as this user",
-:type => 'string',
-:default => "hopsbench"
+:type => 'string'
 
 
