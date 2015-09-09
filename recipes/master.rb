@@ -1,11 +1,3 @@
-directory node[:hopsbench][:home_dir] do
-  owner node[:hopsbench][:user]
-  group node[:hopsbench][:group]
-  mode "755"
-  action :create
-  recursive true
-end
-
 
 ark "hopsbench" do
   url node[:hopsbench][:jar_url]
