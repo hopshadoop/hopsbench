@@ -7,20 +7,20 @@ directory node[:hopsbench][:home_dir] do
 end
 
 
-ark "deployment-scripts" do
-  url node[:hopsbench][:url]
-  version node[:hopsbench][:version]
-  path "#{node[:hopsbench][:home_dir]}"
-  home_dir "#{node[:hopsbench][:home_dir]}/deployment-scripts"
-  owner node[:hopsbench][:user]
-end
+# ark "deployment-scripts" do
+#   url node[:hopsbench][:url]
+#   version node[:hopsbench][:version]
+#   path "#{node[:hopsbench][:home_dir]}"
+#   home_dir "#{node[:hopsbench][:home_dir]}/deployment-scripts"
+#   owner node[:hopsbench][:user]
+# end
 
 
 ark "hopsbench" do
   url node[:hopsbench][:jar_url]
-  version node[:hopsbench][:version]
+#  version node[:hopsbench][:version]
   path "#{node[:hopsbench][:home_dir]}"
-  home_dir "#{node[:hopsbench][:home_dir]}/hopsbench"
+#  home_dir "#{node[:hopsbench][:home_dir]}/hopsbench"
   owner node[:hopsbench][:user]
 end
 
@@ -96,4 +96,16 @@ end
 
 hopsbench_keys "#{homedir}" do
   action :return_publickey
+end
+
+
+file "#{node[:hopsbench][:conf_dir]}/sbin/environment-env.sh" do 
+  owner node[:hopsbench][:user]
+  action :delete
+end
+
+template "#{node[:hopsbench][:conf_dir]}/sbin/environment-env.sh" do
+  source "environment-env.sh.erb"
+  owner node[:hopsbench][:user]
+  mode "775"
 end
