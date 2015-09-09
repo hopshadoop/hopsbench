@@ -12,5 +12,10 @@ dependencies:
       - hopsbench::install
     global:
       - hopsbench::master
+  - recipe: hopsbench::nn
+    local:
+      - hopsbench::install
+    global:
+      - hopsbench::master
 
 
