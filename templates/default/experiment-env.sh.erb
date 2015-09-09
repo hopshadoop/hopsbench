@@ -41,7 +41,7 @@ Benchmark_Types=(
 
 
 #HopsFS Distribution Parameters
-HopsFS_User=nzo
+HopsFS_User=<%= node[:hdfs][:user] %>
 NameNodeRpcPort=<%= node[:hadoop][:nn][:port] %>
 HopsFS_Remote_Dist_Folder=<%= node[:hadoop][:home] %>
 Datanode_Data_Dir=$HopsFS_Remote_Dist_Folder/tmp/dfs/data
