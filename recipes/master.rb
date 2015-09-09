@@ -40,7 +40,7 @@ file "#{node[:hopsbench][:conf_dir]}/namenodes" do
 end
 
 
-file "#{node[:hopsbench][:conf_dir]}/slaves" do
+file "#{node[:hopsbench][:conf_dir]}/experiment-nodes" do
    owner node[:hopsbench][:user]
    action :delete
 end
@@ -50,28 +50,11 @@ slaves += "\n"
 
 Chef::Log.info "The contents of the slaves file: #{slaves}"
 
-file "#{node[:hopsbench][:conf_dir]}/slaves" do
+file "#{node[:hopsbench][:conf_dir]}/experiment-nodes" do
   owner node[:hopsbench][:user]
   group node[:hopsbench][:group]
   mode '644'
   content slaves.to_s
-  action :create
-end
-
-
-file "#{node[:hopsbench][:conf_dir]}/namenodes" do
-   owner node[:hopsbench][:user]
-   action :delete
-end
-
-nns = node[:hops][:nn][:private_ips].join("\n")
-nns += "\n"
-
-file "#{node[:hopsbench][:conf_dir]}/namenodes" do
-  owner node[:hopsbench][:user]
-  group node[:hopsbench][:group]
-  mode '644'
-  content nns.to_s
   action :create
 end
 
@@ -90,12 +73,12 @@ hopsbench_keys "#{homedir}" do
 end
 
 
-file "#{node[:hopsbench][:conf_dir]}/scripts/experiment-env.sh" do 
+file "#{node[:hopsbench][:conf_dir]}/experiment-env.sh" do 
   owner node[:hopsbench][:user]
   action :delete
 end
 
-template "#{node[:hopsbench][:conf_dir]}/scripts/experiment-env.sh" do
+template "#{node[:hopsbench][:conf_dir]}/experiment-env.sh" do
   source "experiment-env.sh.erb"
   owner node[:hopsbench][:user]
   mode "775"

@@ -8,5 +8,5 @@ default[:hopsbench][:group] = node[:hadoop][:group]
 
 default[:hopsbench][:version_dir] = "/usr/local/hopsbench-#{node[:hopsbench][:version]}"
 default[:hopsbench][:home_dir] = "/usr/local/hopsbench"
-default[:hopsbench][:conf_dir] = node[:hopsbench][:version_dir]
+default[:hopsbench][:conf_dir] = "#{node[:hopsbench][:version_dir]}/scripts"
 
