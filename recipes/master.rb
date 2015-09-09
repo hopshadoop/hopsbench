@@ -31,6 +31,23 @@ file "#{node[:hopsbench][:conf_dir]}/namenodes" do
   action :create
 end
 
+file "#{node[:hopsbench][:conf_dir]}/datanodes" do
+   owner node[:hopsbench][:user]
+   action :delete
+end
+
+datanodes = node[:hops][:dn][:private_ips].join("\n")
+datanodes += "\n"
+
+Chef::Log.info "The contents of the datanodes file: #{datanodes}"
+
+file "#{node[:hopsbench][:conf_dir]}/datanodes" do
+  owner node[:hopsbench][:user]
+  group node[:hopsbench][:group]
+  mode '644'
+  content datanodes.to_s
+  action :create
+end
 
 file "#{node[:hopsbench][:conf_dir]}/experiment-nodes" do
    owner node[:hopsbench][:user]
