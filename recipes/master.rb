@@ -87,8 +87,11 @@ file "#{node[:hopsbench][:conf_dir]}/experiment-env.sh" do
   action :delete
 end
 
+num_ndbds = node[:ndb][:ndbd][:private_ips].length
+  
 template "#{node[:hopsbench][:conf_dir]}/experiment-env.sh" do
   source "experiment-env.sh.erb"
   owner node[:hopsbench][:user]
   mode "775"
+    variables({ :num_ndbds => num_ndbds })  
 end
