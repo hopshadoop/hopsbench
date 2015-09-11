@@ -7,11 +7,9 @@ ark "hopsbench" do
   owner node[:hopsbench][:user]
 end
 
-
 package "pssh" do
   action :install
 end
-
 
 file "#{node[:hopsbench][:conf_dir]}/namenodes" do
    owner node[:hopsbench][:user]
