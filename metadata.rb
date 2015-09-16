@@ -34,4 +34,8 @@ attribute "hopsbench/user",
 :description => "Run hopsbench as this user",
 :type => 'string'
 
+attribute "hopsbench/group",
+:description => "Run hopsbench as this group",
+:type => 'string'
+
 
