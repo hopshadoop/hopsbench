@@ -24,7 +24,7 @@ file "#{node['hopsbench']['conf_dir']}/namenodes" do
    action :delete
 end
 
-namenodes = node['hops']['nn']['private_ips'].join("\n")
+namenodes = node['apache_hadoop']['nn']['private_ips'].join("\n")
 namenodes += "\n"
 
 Chef::Log.info "The contents of the namenodes file: #{namenodes}"
@@ -42,7 +42,7 @@ file "#{node['hopsbench']['conf_dir']}/datanodes" do
    action :delete
 end
 
-datanodes = node['hops']['dn']['private_ips'].join("\n")
+datanodes = node['apache_hadoop']['dn']['private_ips'].join("\n")
 datanodes += "\n"
 
 Chef::Log.info "The contents of the datanodes file: #{datanodes}"
@@ -95,7 +95,7 @@ file "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
   action :delete
 end
 
-num_ndbds = node['ndb']['ndbd']['private_ips'].length
+num_ndbds = 0 #node['ndb']['ndbd']['private_ips'].length
 
 template "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
   source "experiment-env.sh.erb"

@@ -57,9 +57,9 @@ NumberNdbDataNodes=<%= @num_ndbds %>                                            
 
 
 #HopsFS Distribution Parameters
-HopsFS_User=<%= node["hops"]["hdfs"]["user"] %>
-NameNodeRpcPort=<%= node["hops"]["nn"]["port"] %>
-HopsFS_Remote_Dist_Folder=<%= node["hops"]["home"] %>
-Datanode_Data_Dir=<%= node["hops"]["data_dir"] %>
+HopsFS_User=<%= node["apache_hadoop"]["hdfs"]["user"] %>
+NameNodeRpcPort=<%= node["apache_hadoop"]["nn"]["port"] %>
+HopsFS_Remote_Dist_Folder=<%= node["apache_hadoop"]["home"] %>
+Datanode_Data_Dir=<%= node["apache_hadoop"]["data_dir"] %>
 #full path to java
 JAVA_BIN=java

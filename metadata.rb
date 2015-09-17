@@ -11,8 +11,7 @@ recipe            "hopsbench::slave",  "configFile=; Experiment name: slave"
 
 
 depends "kagent"
-depends "hops"
-depends "hadoop"
+depends "apache_hadoop"
 depends "ark"
 
 %w{ ubuntu debian rhel centos }.each do |os|
