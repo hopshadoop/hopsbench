@@ -20,9 +20,8 @@ suites:
   - name: default
     run_list:
       - recipe[kagent::install]
-      - recipe[hops::install]
+      - recipe[hadoop::install]
       - recipe[hopsbench::install]
-      - recipe[hops::client]
       - recipe[hopsbench::master]
       - recipe[hopsbench::slave]
     attributes:
