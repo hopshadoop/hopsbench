@@ -13,6 +13,7 @@ recipe            "hopsbench::slave",  "configFile=; Experiment name: slave"
 depends "kagent"
 depends "hops"
 depends "hadoop"
+depends "ark"
 
 %w{ ubuntu debian rhel centos }.each do |os|
   supports os
@@ -36,5 +37,3 @@ attribute "hopsbench/user",
 attribute "hopsbench/group",
 :description => "Run hopsbench as this group",
 :type => 'string'
-
-
