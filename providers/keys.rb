@@ -17,16 +17,14 @@ action :return_publickey do
     mode 0600
   end
 
- if node['kagent']['enabled'] == "true"
-   kagent_param "/tmp" do
-     executing_cookbook "hopsbench"
-     executing_recipe  "master"
-     cookbook "hopsbench"
-     recipe "master"
-     param "public_key"
-     value  node['hopsbench']['master']['public_key']
-   end
- end
+  kagent_param "/tmp" do
+    executing_cookbook "hopsbench"
+    executing_recipe  "master"
+    cookbook "hopsbench"
+    recipe "master"
+    param "public_key"
+    value  node['hopsbench']['master']['public_key']
+  end
 
 end
 
