@@ -69,19 +69,21 @@ file "#{node['hopsbench']['conf_dir']}/experiment-nodes" do
 end
 
 homedir = node['hopsbench']['user'].eql?("root") ? "/root" : "/home/#{node['hopsbench']['user']}"
+Chef::Log.info "Home dir is #{homedir}. Generating ssh keys..."
 
-bash "generate-ssh-keypair-for-master" do
- user node['hopsbench']['user']
-  code <<-EOF
-     ssh-keygen -b 2048 -f #{homedir}/.ssh/id_rsa -t rsa -q -N ''
-  EOF
- not_if { ::File.exists?( "#{homedir}/.ssh/id_rsa" ) }
+kagent_keys "#{homedir}" do
+  cb_user node['hopsbench']['user']
+  cb_group node['hopsbench']['group']
+  action :generate
 end
 
-hopsbench_keys "#{homedir}" do
+kagent_keys "#{homedir}" do
+  cb_user node['hopsbench']['user']
+  cb_group node['hopsbench']['group']
+  cb_name "hopsbench"
+  cb_recipe "master"
   action :return_publickey
 end
-
 
 file "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
   owner node['hopsbench']['user']
