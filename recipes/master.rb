@@ -10,6 +10,10 @@ package "pssh" do
   action :install
 end
 
+package "tmux" do
+  action :install
+end
+
 package "bc" do
   action :install
 end
@@ -97,4 +101,15 @@ template "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
   owner node['hopsbench']['user']
   mode "775"
     variables({ 'num_ndbds' => num_ndbds })
+end
+
+file "#{homedir}/.tmux.conf" do
+  owner node['hopsbench']['user']
+  action :delete
+end
+
+template "#{homedir}/.tmux.conf" do
+  source "tmux.conf.erb"
+  owner node['hopsbench']['user']
+  mode "775"
 end
