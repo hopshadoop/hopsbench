@@ -1,2 +1,2 @@
-
+include_recipe "java"
 # Nothing to do here...

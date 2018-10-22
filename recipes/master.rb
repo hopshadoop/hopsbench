@@ -73,6 +73,30 @@ file "#{node['hopsbench']['conf_dir']}/experiment-nodes" do
   action :create
 end
 
+slavesDomainIds = node['hopsbench']['slave']['private_ips_domainIds'].map{|k,v| "#{k}=#{v}"}.join("\n")
+slavesDomainIds += "\n"
+
+Chef::Log.info "The contents of the slaves domainIds file: #{slavesDomainIds}"
+
+file "#{node['hopsbench']['conf_dir']}/experiment-nodes-domainIds" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content slavesDomainIds.to_s
+  action :create
+end
+
+ndbds = node['ndb']['ndbd']['private_ips'].join("\n")
+ndbds += "\n"
+
+file "#{node['hopsbench']['conf_dir']}/ndb-datanodes" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content ndbds.to_s
+  action :create
+end
+
 homedir = node['hopsbench']['user'].eql?("root") ? "/root" : "/home/#{node['hopsbench']['user']}"
 Chef::Log.info "Home dir is #{homedir}. Generating ssh keys..."
 

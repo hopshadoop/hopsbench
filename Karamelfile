@@ -14,3 +14,6 @@ dependencies:
     global:
       - hopsbench::master
       - hopsbench::install
+  - recipe: hopsbench::dn
+    global:
+      - hopsbench::nn
