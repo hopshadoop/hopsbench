@@ -37,3 +37,7 @@ attribute "hopsbench/user",
 attribute "hopsbench/group",
 :description => "Run hopsbench as this group",
 :type => 'string'
+
+attribute "download_url",
+  :description => "URL for downloading binaries",
+  :type => 'string'
