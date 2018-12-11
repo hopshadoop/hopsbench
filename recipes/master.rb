@@ -1,6 +1,6 @@
 
 ark "hopsbench" do
-  url node['hopsbench']['jar_url']
+  url node['hopsbench']['url']
   version node['hopsbench']['version']
   home_dir "#{node['hopsbench']['home_dir']}"
   owner node['hopsbench']['user']
