@@ -1,3 +1,4 @@
+include_recipe "hopsbench::nmon"
 
 ark "hopsbench" do
   url node['hopsbench']['url']
