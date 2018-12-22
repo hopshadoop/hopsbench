@@ -8,3 +8,7 @@ kagent_keys "#{homedir}" do
   cb_recipe "master"
   action :get_publickey
 end
+
+package "nmon" do
+  action :install
+end
