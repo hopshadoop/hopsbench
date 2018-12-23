@@ -1,16 +1,24 @@
 dependencies:
-  - recipe: hopsbench::install
-    global:
-      - hops::install
   - recipe: hopsbench::master
     global:
       - hopsbench::install
-      - hops::client
   - recipe: hopsbench::slave
     global:
       - hopsbench::master
       - hopsbench::install
   - recipe: hopsbench::nn
+    global:
+      - hopsbench::master
+      - hopsbench::install
+  - recipe: hopsbench::osd
+    global:
+      - hopsbench::master
+      - hopsbench::install
+  - recipe: hopsbench::mds
+    global:
+      - hopsbench::master
+      - hopsbench::install
+  - recipe: hopsbench::mon
     global:
       - hopsbench::master
       - hopsbench::install

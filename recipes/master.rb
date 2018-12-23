@@ -19,39 +19,67 @@ package "bc" do
   action :install
 end
 
-file "#{node['hopsbench']['conf_dir']}/namenodes" do
+file "#{node['hopsbench']['conf_dir']}/osd-nodes" do
    owner node['hopsbench']['user']
    action :delete
 end
 
-namenodes = node['hops']['nn']['private_ips'].join("\n")
-namenodes += "\n"
+osdnodes = node['hopsbench']['osd']['private_ips'].map { |e| node['hopsbench']['osd']['hosts'][e]}.join("\n")
+osdnodes += "\n"
 
-Chef::Log.info "The contents of the namenodes file: #{namenodes}"
 
-file "#{node['hopsbench']['conf_dir']}/namenodes" do
+file "#{node['hopsbench']['conf_dir']}/osd-nodes" do
   owner node['hopsbench']['user']
   group node['hopsbench']['group']
   mode '644'
-  content namenodes.to_s
+  content osdnodes.to_s
   action :create
 end
 
-file "#{node['hopsbench']['conf_dir']}/datanodes" do
+file "#{node['hopsbench']['conf_dir']}/mds-nodes" do
    owner node['hopsbench']['user']
    action :delete
 end
 
-datanodes = node['hops']['dn']['private_ips'].join("\n")
-datanodes += "\n"
+mdsnodes = node['hopsbench']['mds']['private_ips'].map { |e| node['hopsbench']['mds']['hosts'][e]}.join("\n")
+mdsnodes += "\n"
 
-Chef::Log.info "The contents of the datanodes file: #{datanodes}"
 
-file "#{node['hopsbench']['conf_dir']}/datanodes" do
+file "#{node['hopsbench']['conf_dir']}/mds-nodes" do
   owner node['hopsbench']['user']
   group node['hopsbench']['group']
   mode '644'
-  content datanodes.to_s
+  content mdsnodes.to_s
+  action :create
+end
+
+file "#{node['hopsbench']['conf_dir']}/namenodes" do
+   owner node['hopsbench']['user']
+   action :delete
+end
+
+file "#{node['hopsbench']['conf_dir']}/mon-nodes" do
+   owner node['hopsbench']['user']
+   action :delete
+end
+
+monnodes = node['hopsbench']['mon']['private_ips'].map { |e| node['hopsbench']['mon']['hosts'][e]}.join("\n")
+monnodes += "\n"
+
+
+file "#{node['hopsbench']['conf_dir']}/mon-nodes" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content monnodes.to_s
+  action :create
+end
+
+file "#{node['hopsbench']['conf_dir']}/namenodes" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content monnodes.to_s
   action :create
 end
 
@@ -60,7 +88,7 @@ file "#{node['hopsbench']['conf_dir']}/experiment-nodes" do
    action :delete
 end
 
-slaves = node['hopsbench']['slave']['private_ips'].join("\n")
+slaves = node['hopsbench']['slave']['private_ips'].map { |e| node['hopsbench']['slave']['hosts'][e]}.join("\n")
 slaves += "\n"
 
 Chef::Log.info "The contents of the slaves file: #{slaves}"
@@ -88,20 +116,6 @@ kagent_keys "#{homedir}" do
   cb_name "hopsbench"
   cb_recipe "master"
   action :return_publickey
-end
-
-file "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
-  owner node['hopsbench']['user']
-  action :delete
-end
-
-num_ndbds = node['ndb']['ndbd']['private_ips'].length
-
-template "#{node['hopsbench']['conf_dir']}/experiment-env.sh" do
-  source "experiment-env.sh.erb"
-  owner node['hopsbench']['user']
-  mode "775"
-    variables({ 'num_ndbds' => num_ndbds })
 end
 
 file "#{homedir}/.tmux.conf" do
