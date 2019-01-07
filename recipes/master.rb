@@ -37,6 +37,27 @@ file "#{node['hopsbench']['conf_dir']}/namenodes" do
   action :create
 end
 
+domainIdsToNamenodes={}
+for k,v in node['hops']['nn']['private_ips_domainIds'] do
+  if !domainIdsToNamenodes.has_key?(v)
+    domainIdsToNamenodes[v] = []
+  end
+  domainIdsToNamenodes[v] << k
+end
+
+for domainId, nns in domainIdsToNamenodes do
+  nnstr = nns.uniq.join("\n")
+  nnstr += "\n"
+
+  file "#{node['hopsbench']['conf_dir']}/namenodes-#{domainId}" do
+    owner node['hopsbench']['user']
+    group node['hopsbench']['group']
+    mode '644'
+    content nnstr.to_s
+    action :create
+  end
+end
+
 file "#{node['hopsbench']['conf_dir']}/datanodes" do
    owner node['hopsbench']['user']
    action :delete
