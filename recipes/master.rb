@@ -68,6 +68,15 @@ file "#{node['hopsbench']['conf_dir']}/namenodes-domainIds" do
   action :create
 end
 
+namenodesHosts = node['hops']['nn']['hosts'].map{|k,v| "#{k}=#{v}"}.join("\n")
+
+file "#{node['hopsbench']['conf_dir']}/namenodes-hosts" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content namenodesHosts.to_s
+  action :create
+end
 
 
 file "#{node['hopsbench']['conf_dir']}/datanodes" do
