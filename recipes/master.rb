@@ -58,6 +58,18 @@ for domainId, nns in domainIdsToNamenodes do
   end
 end
 
+namenodesHostsToDomainIds = node['hops']['nn']['private_ips_domainIds'].map{|k,v| "#{node['hops']['nn']['hosts'][k]}=#{v}"}.join("\n")
+
+file "#{node['hopsbench']['conf_dir']}/namenodes-domainIds" do
+  owner node['hopsbench']['user']
+  group node['hopsbench']['group']
+  mode '644'
+  content namenodesHostsToDomainIds.to_s
+  action :create
+end
+
+
+
 file "#{node['hopsbench']['conf_dir']}/datanodes" do
    owner node['hopsbench']['user']
    action :delete
