@@ -7,7 +7,7 @@ metadata
 
 cookbook "java"
 
-cookbook "kagent", github: "logicalclocks/kagent-chef", branch: "0.7"
+cookbook "kagent", github: "maismail/kagent-chef", branch: "locDomainId"
 cookbook "conda", github: "logicalclocks/conda-chef", branch: "0.7"
 cookbook "kzookeeper", github: "logicalclocks/kzookeeper", branch: "0.7"
 #cookbook "hadoop", github: "hopshadoop/apache-hadoop-chef", branch: "master"
