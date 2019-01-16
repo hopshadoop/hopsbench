@@ -7,11 +7,11 @@ metadata
 
 cookbook "java"
 
-cookbook "kagent", github: "logicalclocks/kagent-chef", branch: "master"
-cookbook "conda", github: "logicalclocks/conda-chef", branch: "master"
-cookbook "kzookeeper", github: "logicalclocks/kzookeeper", branch: "master"
+cookbook "kagent", github: "logicalclocks/kagent-chef", branch: "0.7"
+cookbook "conda", github: "logicalclocks/conda-chef", branch: "0.7"
+cookbook "kzookeeper", github: "logicalclocks/kzookeeper", branch: "0.7"
 #cookbook "hadoop", github: "hopshadoop/apache-hadoop-chef", branch: "master"
 cookbook "hops", github: "maismail/hops-hadoop-chef", branch: "locdomainId"
 cookbook "ndb", github: "maismail/ndb-chef", branch: "locdomainId"
-cookbook 'hopsmonitor', github: "logicalclocks/hopsmonitor-chef", branch: "master"
-cookbook 'elastic', github: "logicalclocks/elasticsearch-chef", branch: "master"
+cookbook 'hopsmonitor', github: "logicalclocks/hopsmonitor-chef", branch: "0.7"
+cookbook 'elastic', github: "logicalclocks/elasticsearch-chef", branch: "0.7"
