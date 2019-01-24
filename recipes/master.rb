@@ -19,6 +19,10 @@ package "bc" do
   action :install
 end
 
+package "attr" do
+  action :install
+end
+
 file "#{node['hopsbench']['conf_dir']}/osd-nodes" do
    owner node['hopsbench']['user']
    action :delete
